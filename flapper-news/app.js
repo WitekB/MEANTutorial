@@ -5,6 +5,14 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var mongoose = require('mongoose');
+require('./models/Posts');
+require('./models/Comments');
+require('./models/Users');
+
+var passport = require('passport');
+require('./config/passport');
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -58,3 +66,6 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
+
+mongoose.connect('mongodb://localhost/news');
+app.use(passport.initialize());
